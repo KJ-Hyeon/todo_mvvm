@@ -21,4 +21,33 @@ class TodoRepository(application: Application) {
         mTodoItemsAfter = mTodoDao.getTodoAfterList()
     }
 
+    fun getTodoBeforeList() : LiveData<List<TodoModel>> {
+        return mTodoItems
+    }
+    fun getTodoMiddleList() : LiveData<List<TodoModel>> {
+        return mTodoItemsMiddle
+    }
+    fun getTodoAfterList() : LiveData<List<TodoModel>> {
+        return mTodoItemsAfter
+    }
+    fun insertTodo(todoModel: TodoModel) {
+        Thread {
+            mTodoDao.insertTodo(todoModel)
+        }.start()
+    }
+    fun deleteTodo(todoModel: TodoModel) {
+        Thread {
+            mTodoDao.deleteTodo(todoModel)
+        }.start()
+    }
+    fun updateTodoBeforeToMiddle(todoModelID: Long?) {
+        Thread {
+            mTodoDao.updateTodoBeforeToMiddle(todoModelID)
+        }.start()
+    }
+    fun updateTodoMiddleToAfter(todoModelID: Long?) {
+        Thread {
+            mTodoDao.updateTodoMiddleToAfter(todoModelID)
+        }.start()
+    }
 }
