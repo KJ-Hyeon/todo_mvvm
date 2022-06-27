@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <data>
+        <variable
+            name="todoViewModel"
+            type="com.jeong.android.todo_mvvm.viewmodel.TodoViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,6 +25,7 @@
 
         <EditText
             android:id="@+id/tv_todo_before"
+            android:text="@{todoViewModel.text}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/rec_before"
