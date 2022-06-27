@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.jeong.android.todo_mvvm.common.SingleLiveEvent
 import com.jeong.android.todo_mvvm.model.TodoModel
 import com.jeong.android.todo_mvvm.repository.TodoRepository
 
@@ -13,6 +14,7 @@ class TodoViewModel(application: Application): AndroidViewModel(application) {
     private var mTodoItemsMiddle: LiveData<List<TodoModel>>
     private var mTodoItemsAfter: LiveData<List<TodoModel>>
     val text = MutableLiveData("")
+    val addBtnClickEvent = SingleLiveEvent<Any>()
 
     init {
         mTodoRepository = TodoRepository(application)
@@ -43,5 +45,8 @@ class TodoViewModel(application: Application): AndroidViewModel(application) {
     }
     fun deleteText() {
         text.value = null
+    }
+    fun onClickAddButton() {
+        addBtnClickEvent.call()
     }
 }

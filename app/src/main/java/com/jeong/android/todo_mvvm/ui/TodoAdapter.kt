@@ -53,7 +53,9 @@ class TodoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             val pos = adapterPosition
             if (pos != RecyclerView.NO_POSITION) {
-
+                imageButtonRectangle?.setOnClickListener {
+                    listener?.onItemClick(itemView, item, pos)
+                }
             }
         }
     }
