@@ -2,6 +2,7 @@ package com.jeong.android.todo_mvvm.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,14 @@ class BeforeFragment : BaseFragment() {
         binding.todoViewModel = mTodoViewModel
         binding.lifecycleOwner = this
 
+        mTodoViewModel.addBtnClickEvent.observe(viewLifecycleOwner, Observer {
+            todoText = mTodoViewModel.text.value.toString()
+            mTodoViewModel.insertTodo(TodoModel(null, todoText, "BEFORE"))
+            Log.d("TAG", "onCreateView:${todoText}")
+            mTodoViewModel.deleteText()
+            HideEditTextKeyBoard()
 
+        })
 
         mTodoAdapter.setOnClickListenser(object : TodoAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: TodoModel, pos: Int) {

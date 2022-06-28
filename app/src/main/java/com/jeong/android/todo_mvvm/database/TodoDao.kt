@@ -1,11 +1,13 @@
 package com.jeong.android.todo_mvvm.database
 
 import androidx.lifecycle.LiveData
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.jeong.android.todo_mvvm.model.TodoModel
 
+@Dao
 interface TodoDao {
     @Query("SELECT * from Todo where status = 'BEFORE'")
     fun getTodoBeforeList() : LiveData<List<TodoModel>>

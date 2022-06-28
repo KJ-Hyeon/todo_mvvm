@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         // Tab과 Viewpager를 연결해줌
         TabLayoutMediator(binding.tabs, binding.viewpager) { tab, position ->
             tab.text = tabName[position]
-        }
+        }.attach()
     }
     private inner class PagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount(): Int {

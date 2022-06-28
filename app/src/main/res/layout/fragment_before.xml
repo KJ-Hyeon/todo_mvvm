@@ -24,8 +24,9 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <EditText
+            android:textColor="@color/black"
             android:id="@+id/tv_todo_before"
-            android:text="@{todoViewModel.text}"
+            android:text="@={todoViewModel.text}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/rec_before"
