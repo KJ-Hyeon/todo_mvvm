@@ -16,7 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tabRippleColor="@color/main_color"/>
+        app:tabRippleColor="@color/main_color"
+        style="@style/Widget.App.TabLayout"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
