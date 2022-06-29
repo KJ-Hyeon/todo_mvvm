@@ -18,7 +18,8 @@ import com.jeong.android.todo_mvvm.viewmodel.TodoViewModel
 class AfterFragment : BaseFragment() {
     private lateinit var binding: FragmentAfterBinding
     private lateinit var mTodoViewModel: TodoViewModel
-    private lateinit var mTodoAdapter: TodoAdapter
+//    private lateinit var mTodoAdapter: TodoAdapter
+    private lateinit var mTodoAfterAdapter: TodoAfterAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +30,12 @@ class AfterFragment : BaseFragment() {
         initRecyclerView(binding.recAfter)
         initViewModel()
 
-        mTodoAdapter.setOnClickListenser(object : TodoAdapter.OnItemClickListener{
+//        mTodoAfterAdapter.setOnClickListenser(object : TodoAdapter.OnItemClickListener{
+//            override fun onItemClick(v: View, data: TodoModel, pos: Int) {
+//                mTodoViewModel.deleteTodo(data)
+//            }
+//        })
+        mTodoAfterAdapter.setOnItemClick(object : TodoAfterAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: TodoModel, pos: Int) {
                 mTodoViewModel.deleteTodo(data)
             }
@@ -42,21 +48,21 @@ class AfterFragment : BaseFragment() {
             .create(TodoViewModel::class.java)
         mTodoViewModel.getTodoAfterList().observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
-                mTodoAdapter.setTodoItems(it)
+                mTodoAfterAdapter.setAfterItems(it)
                 binding.tvEmpty.visibility = View.VISIBLE
             } else {
-                mTodoAdapter.setTodoItems(it)
+                mTodoAfterAdapter.setAfterItems(it)
                 binding.tvEmpty.visibility = View.GONE
             }
         })
     }
 
     private fun initRecyclerView(rec: RecyclerView) {
-        mTodoAdapter = TodoAdapter()
+        mTodoAfterAdapter = TodoAfterAdapter()
         rec.run {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = mTodoAdapter
+            adapter = mTodoAfterAdapter
         }
     }
 

@@ -18,12 +18,13 @@ class TodoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var listener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = when(viewType) {
-            1 -> LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_rec_after, parent, false)
-            else -> LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_rec, parent, false)
-        }
+//        val view = when(viewType) {
+//            1 -> LayoutInflater.from(parent.context)
+//                .inflate(R.layout.item_rec_after, parent, false)
+//            else -> LayoutInflater.from(parent.context)
+//                .inflate(R.layout.item_rec, parent, false)
+//        }
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rec, parent, false)
         return TodoViewHolder(view)
     }
 
@@ -43,7 +44,7 @@ class TodoAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     inner class TodoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val todoText = view.findViewById<TextView>(R.id.tv_todo)
+        val todoText = itemView.findViewById<TextView>(R.id.tv_todo)
         val imageButtonRectangle = itemView.findViewById<ImageButton>(R.id.btn_check)
         fun bind(item: TodoModel) {
             todoText?.text = item.description
