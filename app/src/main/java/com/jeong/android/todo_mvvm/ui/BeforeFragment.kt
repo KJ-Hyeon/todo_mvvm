@@ -38,11 +38,15 @@ class BeforeFragment : BaseFragment() {
 
         mTodoViewModel.addBtnClickEvent.observe(viewLifecycleOwner, Observer {
             todoText = mTodoViewModel.text.value.toString()
-            mTodoViewModel.insertTodo(TodoModel(null, todoText, "BEFORE"))
-            Log.d("TAG", "onCreateView:${todoText}")
-            mTodoViewModel.deleteText()
-            HideEditTextKeyBoard()
+            if (todoText.isNullOrEmpty()) {
+                showMessage("할 일을 입력해주세요")
 
+            } else {
+                mTodoViewModel.insertTodo(TodoModel(null, todoText, "BEFORE"))
+                Log.d("TAG", "onCreateView:${todoText}")
+                mTodoViewModel.deleteText()
+                HideEditTextKeyBoard()
+            }
         })
 
         mTodoAdapter.setOnClickListenser(object : TodoAdapter.OnItemClickListener{

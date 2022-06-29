@@ -43,7 +43,13 @@ class MiddleFragment : BaseFragment() {
         mTodoViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
             .create(TodoViewModel::class.java)
         mTodoViewModel.getTodoMiddleList().observe(viewLifecycleOwner, Observer {
-            mTodoAdapter.setTodoItems(it)
+            if (it.isNullOrEmpty()) {
+                mTodoAdapter.setTodoItems(it)
+                binding.tvEmpty.visibility = View.VISIBLE
+            } else {
+                mTodoAdapter.setTodoItems(it)
+                binding.tvEmpty.visibility = View.GONE
+            }
         })
     }
 
