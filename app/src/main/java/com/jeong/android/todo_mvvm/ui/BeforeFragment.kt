@@ -42,7 +42,7 @@ class BeforeFragment : BaseFragment() {
                 showMessage("할 일을 입력해주세요")
 
             } else {
-                mTodoViewModel.insertTodo(TodoModel(null, todoText, "BEFORE"))
+                mTodoViewModel.insertTodo(TodoModel(null, todoText, "BEFORE",currentDate()))
                 Log.d("TAG", "onCreateView:${todoText}")
                 mTodoViewModel.deleteText()
                 HideEditTextKeyBoard()

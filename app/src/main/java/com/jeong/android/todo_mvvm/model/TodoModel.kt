@@ -11,5 +11,6 @@ data class TodoModel (
     @ColumnInfo(name = "description")
     var description: String,
     @ColumnInfo(name = "status")
-    var status: String
+    var status: String,
+    var date : String
         )

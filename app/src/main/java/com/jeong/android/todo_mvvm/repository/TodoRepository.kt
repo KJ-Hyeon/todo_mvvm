@@ -9,26 +9,26 @@ import com.jeong.android.todo_mvvm.model.TodoModel
 class TodoRepository(application: Application) {
     private var mTodoDatabase: TodoDatabase
     private var mTodoDao: TodoDao
-    private var mTodoItems: LiveData<List<TodoModel>>
-    private var mTodoItemsMiddle: LiveData<List<TodoModel>>
-    private var mTodoItemsAfter: LiveData<List<TodoModel>>
+//    private var mTodoItems: LiveData<List<TodoModel>>
+//    private var mTodoItemsMiddle: LiveData<List<TodoModel>>
+//    private var mTodoItemsAfter: LiveData<List<TodoModel>>
 
     init {
         mTodoDatabase = TodoDatabase.getInstance(application)
         mTodoDao = mTodoDatabase.todoDao()
-        mTodoItems = mTodoDao.getTodoBeforeList()
-        mTodoItemsMiddle = mTodoDao.getTodoMiddleList()
-        mTodoItemsAfter = mTodoDao.getTodoAfterList()
+//        mTodoItems = mTodoDao.getTodoBeforeList()
+//        mTodoItemsMiddle = mTodoDao.getTodoMiddleList()
+//        mTodoItemsAfter = mTodoDao.getTodoAfterList()
     }
 
     fun getTodoBeforeList() : LiveData<List<TodoModel>> {
-        return mTodoItems
+        return mTodoDao.getTodoBeforeList()
     }
     fun getTodoMiddleList() : LiveData<List<TodoModel>> {
-        return mTodoItemsMiddle
+        return mTodoDao.getTodoMiddleList()
     }
     fun getTodoAfterList() : LiveData<List<TodoModel>> {
-        return mTodoItemsAfter
+        return mTodoDao.getTodoAfterList()
     }
     fun insertTodo(todoModel: TodoModel) {
         Thread {
