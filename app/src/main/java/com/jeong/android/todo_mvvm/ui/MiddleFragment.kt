@@ -1,9 +1,13 @@
 package com.jeong.android.todo_mvvm.ui
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -30,7 +34,27 @@ class MiddleFragment : BaseFragment() {
         initViewModel()
         mTodoAdapter.setOnClickListenser(object : TodoAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: TodoModel, pos: Int) {
-                mTodoViewModel.updateTodoMiddleToAfter(data.id)
+                val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_middle, null)
+                val alertDialog = AlertDialog.Builder(requireContext(), R.style.CustomDialog)
+                    .setView(dialogView)
+                    .create()
+
+                val selectTodo = dialogView.findViewById<TextView>(R.id.dialog_tv_todo)
+                val btnOk = dialogView.findViewById<Button>(R.id.dialog_btn_ok)
+                val btnCancel = dialogView.findViewById<ImageView>(R.id.dialog_ic_cancel)
+
+                selectTodo.text = data.description
+
+                btnOk.setOnClickListener {
+                    mTodoViewModel.updateTodoMiddleToAfter(data.id)
+                    alertDialog.dismiss()
+                }
+
+                btnCancel.setOnClickListener {
+                    alertDialog.dismiss()
+                }
+
+                alertDialog.show()
             }
         })
 
