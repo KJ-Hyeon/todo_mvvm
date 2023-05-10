@@ -1,6 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/todoInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/todoInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="TODO"
+                android:inputType="text"
+                android:maxLength="20" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descriptionInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="20dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todoInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/descriptionInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:inputType="text"
+                android:maxLength="20" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/folderInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Folder"
+            app:layout_constraintEnd_toStartOf="@id/addFolder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/descriptionInputLayout">
+
+            <AutoCompleteTextView
+                android:id="@+id/folderAutoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/addFolder"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/baseline_create_new_folder_24"
+            app:layout_constraintBottom_toBottomOf="@id/folderInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/folderInputLayout"
+            app:layout_constraintTop_toTopOf="@id/folderInputLayout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/starDayInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@id/dash"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/folderInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/startDayInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/dash"
+            android:layout_width="10dp"
+            android:layout_height="3dp"
+            android:background="@color/gray"
+            app:layout_constraintBottom_toBottomOf="@id/starDayInputLayout"
+            app:layout_constraintEnd_toEndOf="@id/folderInputLayout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/folderInputLayout"
+            app:layout_constraintTop_toTopOf="@id/starDayInputLayout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/endDayInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toStartOf="@id/calendarButton"
+            app:layout_constraintStart_toEndOf="@id/dash"
+            app:layout_constraintTop_toBottomOf="@id/folderInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/endDayInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/calendarButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/baseline_calendar_today_24"
+            app:layout_constraintBottom_toBottomOf="@id/endDayInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/endDayInputLayout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
