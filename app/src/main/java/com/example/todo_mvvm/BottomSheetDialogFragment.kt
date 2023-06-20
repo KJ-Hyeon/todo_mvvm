@@ -1,5 +1,6 @@
 package com.example.todo_mvvm
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -35,10 +36,10 @@ class BottomSheetDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.bottom_sheet_dialog, container, false)
 
-        binding.calendarView.addDecorators(BeforedayDecorator())
+        binding.calendarView.addDecorators(BeforedayDecorator(),TodayDecorator(requireContext()))
 
         binding.calendarView.setOnRangeSelectedListener { widget, dates ->
             startDay = dates[0].date.toString()
@@ -70,6 +71,20 @@ class BottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     }
 
+    inner class TodayDecorator(context: Context): DayViewDecorator {
+        private var drawable: Drawable = ContextCompat.getDrawable(context, R.drawable.calendar_today_background)!!
+        override fun shouldDecorate(day: CalendarDay?): Boolean {
+            return day == CalendarDay.today()
+        }
+
+        override fun decorate(view: DayViewFacade?) {
+            view?.let {
+                it.addSpan(ForegroundColorSpan(Color.GRAY))
+                it.setSelectionDrawable(drawable)
+            }
+        }
+    }
+
     inner class BeforedayDecorator() : DayViewDecorator {
 
         override fun shouldDecorate(day: CalendarDay): Boolean {
@@ -94,7 +109,10 @@ class BottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
 
         override fun decorate(view: DayViewFacade?) {
-            view?.setSelectionDrawable(drawable)
+            view?.let {
+                it.setSelectionDrawable(drawable)
+                it.setDaysDisabled(true)
+            }
         }
     }
 
