@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main_color">#03A9F4</color>
+    <color name="calendar_today">#9ED4EC</color>
     <color name="menu_unselected">#BFBFBF</color>
     <color name="gray">#BFBFBF</color>
 </resources>
