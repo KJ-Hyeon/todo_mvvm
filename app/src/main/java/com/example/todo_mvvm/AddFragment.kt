@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -56,16 +57,21 @@ class AddFragment: Fragment() {
             addFolder()
         }
 
-//        binding.todoAddButton.setOnClickListener{
-//            val todoModel = TodoModel(
-//                binding.todoInputEditText.text.toString(),
-//                binding.descriptionInputEditText.text.toString(),
-//                binding.folderAutoTextView.text.toString(),
-//                binding.startDayInputEditText.text.toString(),
-//                binding.endDayInputEditText.text.toString()
-//            )
-//            binding.todoModel = todoModel
-//        }
+        todoViewModel.addTodoEvent.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let {
+                Toast.makeText(requireContext(), "Todo추가 완료!",Toast.LENGTH_SHORT).show()
+                binding.todoInputEditText.setText("")
+                binding.descriptionInputEditText.setText("")
+                binding.startDayInputEditText.setText("")
+                binding.endDayInputEditText.setText("")
+                binding.folderAutoTextView.text.clear()
+            }
+        }
+        todoViewModel.addErrorTodoEvent.observe(viewLifecycleOwner){
+            it.getContentIfNotHandled()?.let {
+                Toast.makeText(requireContext(), "모든 칸을 입력해주세요!", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         return binding.root
     }
