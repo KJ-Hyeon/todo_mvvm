@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.example.todo_mvvm.databinding.FragmentHomeBinding
 import com.example.todo_mvvm.viewmodel.TodoViewModel
 import com.example.todo_mvvm.viewmodel.ViewModelFactory
@@ -17,7 +15,8 @@ import com.example.todo_mvvm.viewmodel.ViewModelFactory
 class HomeFragment: Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var todoViewModel: TodoViewModel
+//    private lateinit var todoViewModel: TodoViewModel
+    private val todoViewModel: TodoViewModel by activityViewModels { ViewModelFactory(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +24,7 @@ class HomeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        todoViewModel = ViewModelProvider(this, ViewModelFactory(requireContext()))[TodoViewModel::class.java]
+//        todoViewModel = ViewModelProvider(this, ViewModelFactory(requireContext()))[TodoViewModel::class.java]
         return binding.root
     }
 

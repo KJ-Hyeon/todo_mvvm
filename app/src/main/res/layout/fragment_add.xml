@@ -156,8 +156,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/endDayInputLayout" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:onClick="@{() -> viewModel.addTodo(todoModel)}"
+        <Button
+            android:onClick="@{() -> viewModel.addTodo(todoInputEditText.getText().toString(), descriptionInputEditText.getText().toString(),folderAutoTextView.getText().toString(),startDayInputEditText.getText().toString(), endDayInputEditText.getText().toString())}"
             android:id="@+id/todoAddButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

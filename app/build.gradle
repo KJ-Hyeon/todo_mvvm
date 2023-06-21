@@ -65,5 +65,7 @@ dependencies {
     implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
     // Material DatePicker
     implementation 'com.google.android.material:material:1.9.0'
+    // fragment 공유 viewmodel
+    implementation "androidx.fragment:fragment-ktx:1.5.7"
 
 }

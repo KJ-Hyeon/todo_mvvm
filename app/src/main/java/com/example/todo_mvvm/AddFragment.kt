@@ -3,7 +3,6 @@ package com.example.todo_mvvm
 import android.app.AlertDialog
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.example.todo_mvvm.databinding.FragmentAddBinding
 import com.example.todo_mvvm.db.TodoModel
 import com.example.todo_mvvm.viewmodel.TodoViewModel
@@ -25,7 +24,8 @@ class AddFragment: Fragment() {
     private lateinit var binding: FragmentAddBinding
     private var dropdownItems = ArrayList<String>()
     private lateinit var sharedPref: SharedPreferences
-    private lateinit var todoViewModel: TodoViewModel
+//    private lateinit var todoViewModel: TodoViewModel
+    private val todoViewModel: TodoViewModel by activityViewModels { ViewModelFactory(requireContext()) }
 
     override fun onCreateView(
         // 여기서 pref저장한 값 초기화
@@ -34,7 +34,7 @@ class AddFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add, container, false)
-        todoViewModel = ViewModelProvider(this, ViewModelFactory(requireContext()))[TodoViewModel::class.java]
+//        todoViewModel = ViewModelProvider(this, ViewModelFactory(requireContext()))[TodoViewModel::class.java]
         binding.viewModel = todoViewModel
         binding.todoModel = TodoModel("todo","todo","todo","2021","2022")
 //        TodoModel(

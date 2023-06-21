@@ -17,7 +17,9 @@ class TodoViewModel(private val todoRepository: TodoRepository): ViewModel() {
     init {
         viewModelScope.launch {
             todoItem = todoRepository.getAllTodo().toMutableList()
-            _todoList.value = todoItem
+            _todoList.postValue(todoItem)
+            Log.e("ViewModel_Init:","todoItem:$todoItem")
+            Log.e("ViewModel_Init:","_todoList:$_todoList")
         }
 //        CoroutineScope(Dispatchers.IO).launch {
 //            _todo.postValue(todoRepository.getAllTodo())
@@ -33,12 +35,14 @@ class TodoViewModel(private val todoRepository: TodoRepository): ViewModel() {
 
     }
 
-    fun addTodo(todo: TodoModel) {
+    fun addTodo(todo: String, description: String, folder: String, startDay: String, endDay: String) {
+        val todoModel = TodoModel(todo, description, folder, startDay, endDay)
         viewModelScope.launch {
-            Log.e("addTodo","${todo.todo}")
-            todoRepository.addTodo(todo)
-            todoItem.add(todo)
-            _todoList.value = todoItem
+            todoRepository.addTodo(todoModel)
+            todoItem.add(todoModel)
+            _todoList.postValue(todoItem)
+            Log.e("ViewModel_addTodo:","todoItem:$todoItem")
+            Log.e("ViewModel_addTodo:","_todoList:$_todoList")
         }
     }
 }
