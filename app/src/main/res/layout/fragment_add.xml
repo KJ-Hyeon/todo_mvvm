@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.example.todo_mvvm.viewmodel.TodoViewModel" />
+        <variable
+            name="todoModel"
+            type="com.example.todo_mvvm.db.TodoModel" />
 
     </data>
 
@@ -151,6 +157,7 @@
             app:layout_constraintTop_toTopOf="@id/endDayInputLayout" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:onClick="@{() -> viewModel.addTodo(todoModel)}"
             android:id="@+id/todoAddButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

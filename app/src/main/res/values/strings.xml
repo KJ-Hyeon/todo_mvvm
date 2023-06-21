@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Todo_mvvm</string>
+    <string name="toolbar_main_text">MY TODO</string>
+    <string name="edit_todo_hint">TODO</string>
+    <string name="edit_description_hint">Description</string>
+    <string name="edit_folder_hint">Folder</string>
+    <string name="button_add_todo">TODO 추가하기</string>
 </resources>

@@ -12,7 +12,11 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.todo_mvvm.databinding.FragmentAddBinding
+import com.example.todo_mvvm.db.TodoModel
+import com.example.todo_mvvm.viewmodel.TodoViewModel
+import com.example.todo_mvvm.viewmodel.ViewModelFactory
 import org.json.JSONArray
 import org.json.JSONException
 
@@ -21,14 +25,25 @@ class AddFragment: Fragment() {
     private lateinit var binding: FragmentAddBinding
     private var dropdownItems = ArrayList<String>()
     private lateinit var sharedPref: SharedPreferences
+    private lateinit var todoViewModel: TodoViewModel
 
     override fun onCreateView(
         // 여기서 pref저장한 값 초기화
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add, container, false)
+        todoViewModel = ViewModelProvider(this, ViewModelFactory(requireContext()))[TodoViewModel::class.java]
+        binding.viewModel = todoViewModel
+        binding.todoModel = TodoModel("todo","todo","todo","2021","2022")
+//        TodoModel(
+//            binding.todoInputEditText.text.toString(),
+//            binding.descriptionInputEditText.text.toString(),
+//            binding.folderAutoTextView.text.toString(),
+//            binding.startDayInputEditText.text.toString(),
+//            binding.endDayInputEditText.text.toString()
+//        )
 
         sharedPref = requireActivity().getSharedPreferences("dropdown_prefs",0)
         loadDropdownMenu()
@@ -40,6 +55,17 @@ class AddFragment: Fragment() {
         binding.addFolder.setOnClickListener {
             addFolder()
         }
+
+//        binding.todoAddButton.setOnClickListener{
+//            val todoModel = TodoModel(
+//                binding.todoInputEditText.text.toString(),
+//                binding.descriptionInputEditText.text.toString(),
+//                binding.folderAutoTextView.text.toString(),
+//                binding.startDayInputEditText.text.toString(),
+//                binding.endDayInputEditText.text.toString()
+//            )
+//            binding.todoModel = todoModel
+//        }
 
         return binding.root
     }
@@ -88,17 +114,17 @@ class AddFragment: Fragment() {
         val dropdownAdapter = ArrayAdapter<String>(requireContext(), R.layout.item_dropdown, dropdownItems)
         binding.folderAutoTextView.setAdapter(dropdownAdapter)
         binding.folderAutoTextView.setOnItemClickListener { parent, view, position, id ->
-            val clickItem = parent.getItemAtPosition(position).toString()
+//            val clickItem = parent.getItemAtPosition(position).toString()
             binding.folderAutoTextView.clearFocus()
         }
     }
 
     private fun saveDropdownMenu() {
-        var jsonArray = JSONArray()
+        val jsonArray = JSONArray()
         for (dropdownItem in dropdownItems) {
             jsonArray.put(dropdownItem)
         }
-        var result = jsonArray.toString()
+        val result = jsonArray.toString()
         sharedPref.edit().apply {
             putString("dropdownItems",result)
             apply()
@@ -124,7 +150,6 @@ class AddFragment: Fragment() {
         super.onStop()
         saveDropdownMenu()
     }
-
     override fun onStart() {
         super.onStart()
         // AutoTextView에 데이터가 남아있는 상태에서 프래그먼트를 전환하면 해당 프래그먼트로 돌아올 경우
