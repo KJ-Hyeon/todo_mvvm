@@ -1,4 +1,4 @@
-package com.example.todo_mvvm
+package com.example.todo_mvvm.ui.add
 
 import android.app.AlertDialog
 import android.content.SharedPreferences
@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.todo_mvvm.BottomSheetDialogFragment
+import com.example.todo_mvvm.R
 import com.example.todo_mvvm.databinding.FragmentAddBinding
 import com.example.todo_mvvm.db.TodoModel
 import com.example.todo_mvvm.viewmodel.TodoViewModel
@@ -37,7 +39,7 @@ class AddFragment: Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add, container, false)
 //        todoViewModel = ViewModelProvider(this, ViewModelFactory(requireContext()))[TodoViewModel::class.java]
         binding.viewModel = todoViewModel
-        binding.todoModel = TodoModel("todo","todo","todo","2021","2022")
+        binding.todoModel = TodoModel("todo","todo","todo","2021","2022", false)
 //        TodoModel(
 //            binding.todoInputEditText.text.toString(),
 //            binding.descriptionInputEditText.text.toString(),
@@ -81,7 +83,8 @@ class AddFragment: Fragment() {
         val bottomSheetDialog = BottomSheetDialogFragment()
         bottomSheetDialog.show(parentFragmentManager, "bottomSheetDialog")
 
-        bottomSheetDialog.setonDateSelectListener(object : BottomSheetDialogFragment.BottomSheetFragmentInterface {
+        bottomSheetDialog.setonDateSelectListener(object :
+            BottomSheetDialogFragment.BottomSheetFragmentInterface {
             override fun onButtonClick(startDay: String, endDay: String) {
                 binding.startDayInputEditText.setText(startDay)
                 binding.endDayInputEditText.setText(endDay)
@@ -117,7 +120,8 @@ class AddFragment: Fragment() {
     }
 
     private fun setupDropdown() {
-        val dropdownAdapter = ArrayAdapter<String>(requireContext(), R.layout.item_dropdown, dropdownItems)
+        val dropdownAdapter = ArrayAdapter<String>(requireContext(),
+            R.layout.item_dropdown, dropdownItems)
         binding.folderAutoTextView.setAdapter(dropdownAdapter)
         binding.folderAutoTextView.setOnItemClickListener { parent, view, position, id ->
 //            val clickItem = parent.getItemAtPosition(position).toString()
