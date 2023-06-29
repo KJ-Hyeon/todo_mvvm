@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.todo_mvvm.R
 import com.example.todo_mvvm.databinding.FragmentHomeBinding
 import com.example.todo_mvvm.viewmodel.TodoViewModel
@@ -18,7 +19,7 @@ class HomeFragment: Fragment() {
     private lateinit var binding: FragmentHomeBinding
 //    private lateinit var todoViewModel: TodoViewModel
     private val todoViewModel: TodoViewModel by activityViewModels { ViewModelFactory(requireContext()) }
-    private val categoryAdapter = CategoryListAdapter()
+    private val todoAdapter = TodoListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +28,7 @@ class HomeFragment: Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 //        todoViewModel = ViewModelProvider(this, ViewModelFactory(requireContext()))[TodoViewModel::class.java]
-        binding.homeRecyclerView.adapter = categoryAdapter
+        binding.homeRecyclerView.adapter = todoAdapter
         return binding.root
     }
 
@@ -35,7 +36,7 @@ class HomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         todoViewModel.todoList.observe(viewLifecycleOwner) {
-            categoryAdapter.submitList(it)
+            todoAdapter.submitList(it)
         }
     }
 }

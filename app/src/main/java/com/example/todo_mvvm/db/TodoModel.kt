@@ -11,5 +11,5 @@ data class TodoModel(
     val Folder: String,
     val start_day: String,
     val end_day: String,
-    val check: Boolean
+    var check: Boolean
 )

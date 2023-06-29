@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.example.todo_mvvm.db.TodoModel" />
@@ -10,28 +12,88 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/todo_recyclerview_background"
+        android:padding="12dp"
+        android:layout_marginBottom="18dp">
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Category"
+            android:text="@{item.folder}"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <CheckBox
             android:id="@+id/check_todo"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/todo_check_selector"
+            android:button="@null"
+            android:checked="@{item.check}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:button="@null" />
+            app:layout_constraintTop_toBottomOf="@id/tv_category" />
 
         <TextView
             android:id="@+id/tv_todo"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            todoCheck="@={item.check}"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/check_todo"
-            app:layout_constraintTop_toTopOf="@id/check_todo"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item.todo}"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginStart="12dp"
             app:layout_constraintBottom_toBottomOf="@id/check_todo"
-            android:text="todo" />
+            app:layout_constraintEnd_toStartOf="@id/tv_startDay"
+            app:layout_constraintStart_toEndOf="@id/check_todo"
+            app:layout_constraintTop_toTopOf="@id/check_todo"
+            tools:text="06/29~06/30 Todo" />
+
+        <TextView
+            android:id="@+id/tv_endDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            dateString="@{item.end_day}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/check_todo"
+            tools:text="06-29" />
+
+        <TextView
+            android:id="@+id/tv_dash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="~"
+            app:layout_constraintBottom_toBottomOf="@id/tv_startDay"
+            app:layout_constraintEnd_toStartOf="@id/tv_endDay"
+            app:layout_constraintTop_toTopOf="@id/tv_startDay" />
+
+        <TextView
+            android:id="@+id/tv_startDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            dateString="@{item.start_day}"
+            app:layout_constraintEnd_toStartOf="@id/tv_dash"
+            app:layout_constraintTop_toTopOf="@id/check_todo"
+            tools:text="06-28" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tv_todo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_todo"
+            android:text="@{item.description}"
+            android:layout_marginTop="4dp"
+            tools:text="Todo의 설명란입니다." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -46,7 +46,7 @@ class TodoViewModel(private val todoRepository: TodoRepository): ViewModel() {
         if (todo.isEmpty() || description.isEmpty() || folder.isEmpty() || startDay.isEmpty() || endDay.isEmpty()) {
             _addErrorTodoEvent.value = Event(true)
         } else {
-            val todoModel = TodoModel(todo, description, folder, startDay, endDay)
+            val todoModel = TodoModel(todo, description, folder, startDay, endDay, false)
             viewModelScope.launch {
                 todoRepository.addTodo(todoModel)
                 todoItem.add(todoModel)

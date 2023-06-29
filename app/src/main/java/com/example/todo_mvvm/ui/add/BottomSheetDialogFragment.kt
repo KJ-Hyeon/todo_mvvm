@@ -1,4 +1,4 @@
-package com.example.todo_mvvm
+package com.example.todo_mvvm.ui.add
 
 import android.content.Context
 import android.graphics.Color
@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import com.example.todo_mvvm.R
 import com.example.todo_mvvm.databinding.BottomSheetDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -72,7 +73,9 @@ class BottomSheetDialogFragment : BottomSheetDialogFragment() {
     }
 
     inner class TodayDecorator(context: Context): DayViewDecorator {
-        private var drawable: Drawable = ContextCompat.getDrawable(context, R.drawable.calendar_today_background)!!
+        private var drawable: Drawable = ContextCompat.getDrawable(context,
+            R.drawable.calendar_today_background
+        )!!
         override fun shouldDecorate(day: CalendarDay?): Boolean {
             return day == CalendarDay.today()
         }
