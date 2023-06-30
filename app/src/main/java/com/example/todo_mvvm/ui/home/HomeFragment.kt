@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.todo_mvvm.R
 import com.example.todo_mvvm.databinding.FragmentHomeBinding
+import com.example.todo_mvvm.db.TodoModel
 import com.example.todo_mvvm.viewmodel.TodoViewModel
 import com.example.todo_mvvm.viewmodel.ViewModelFactory
 
@@ -38,5 +39,11 @@ class HomeFragment: Fragment() {
         todoViewModel.todoList.observe(viewLifecycleOwner) {
             todoAdapter.submitList(it)
         }
+
+        todoAdapter.setOnItemClickListener(object : TodoListAdapter.OnItemClickListener {
+            override fun checkboxClick(v: View, todoModel: TodoModel) {
+                todoViewModel.todoCheckUpdate(todoModel)
+            }
+        })
     }
 }

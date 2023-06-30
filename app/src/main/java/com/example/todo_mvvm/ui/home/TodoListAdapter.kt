@@ -2,6 +2,7 @@ package com.example.todo_mvvm.ui.home
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
@@ -14,6 +15,11 @@ import com.example.todo_mvvm.db.TodoModel
 class TodoListAdapter: ListAdapter<TodoModel, TodoListAdapter.TodoViewHolder>(diffUtil) {
 
     private lateinit var binding: ItemTodoBinding
+    private var listener: OnItemClickListener? = null
+
+    interface OnItemClickListener {
+        fun checkboxClick(v: View, todoModel: TodoModel)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_todo, parent, false)
@@ -24,12 +30,18 @@ class TodoListAdapter: ListAdapter<TodoModel, TodoListAdapter.TodoViewHolder>(di
         holder.bind(currentList[position])
     }
 
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
+
     inner class TodoViewHolder(private val binding: ItemTodoBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: TodoModel) {
             binding.item = item
-            binding.checkTodo.setOnClickListener {
-                item.check = !item.check
+            binding.todoCheck.setOnClickListener {
+                val check = binding.todoCheck.isChecked
+                item.check = check
+                listener?.checkboxClick(it, item)
             }
         }
     }

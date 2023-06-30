@@ -21,28 +21,16 @@ class TodoViewModel(private val todoRepository: TodoRepository): ViewModel() {
     private var _addErrorTodoEvent = MutableLiveData<Event<Boolean>>()
     var addErrorTodoEvent: LiveData<Event<Boolean>> = _addErrorTodoEvent
 
+    var checkState = MutableLiveData<Boolean>()
+
     init {
         viewModelScope.launch {
             todoItem = todoRepository.getAllTodo().toMutableList()
             _todoList.postValue(todoItem)
         }
-//        CoroutineScope(Dispatchers.IO).launch {
-//            _todo.postValue(todoRepository.getAllTodo())
-//        }
-//        viewModelScope.launch {
-//            withContext(Dispatchers.IO) {
-//                _todo.postValue(todoRepository.getAllTodo())
-//            }
-//        }
-//        viewModelScope.launch(Dispatchers.IO) {
-//            _todo.postValue(todoRepository.getAllTodo())
-//        }
-
     }
 
     fun addTodo(todo: String, description: String, folder: String, startDay: String, endDay: String) {
-        // 여기서 파라미터값들 중 하나라도 null 값이면 _addErrorTodoEvent를 발생시켜서 todo 추가를 막고 view에서
-        // ToastMessage("모든 값들을 입력해주세요")를 사용자에게 보여준다?
         if (todo.isEmpty() || description.isEmpty() || folder.isEmpty() || startDay.isEmpty() || endDay.isEmpty()) {
             _addErrorTodoEvent.value = Event(true)
         } else {
@@ -55,4 +43,24 @@ class TodoViewModel(private val todoRepository: TodoRepository): ViewModel() {
             _addTodoEvent.value = Event(true)
         }
     }
+
+    fun todoCheckUpdate(todoModel: TodoModel) {
+        viewModelScope.launch {
+            todoRepository.updateCheck(todoModel)
+        }
+    }
+
+
+//        CoroutineScope(Dispatchers.IO).launch {
+//            _todo.postValue(todoRepository.getAllTodo())
+//        }
+//        viewModelScope.launch {
+//            withContext(Dispatchers.IO) {
+//                _todo.postValue(todoRepository.getAllTodo())
+//            }
+//        }
+//        viewModelScope.launch(Dispatchers.IO) {
+//            _todo.postValue(todoRepository.getAllTodo())
+//        }
+
 }
