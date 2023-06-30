@@ -18,7 +18,7 @@
         android:layout_marginBottom="18dp">
 
         <TextView
-            android:id="@+id/tv_category"
+            android:id="@+id/categoryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Category"
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <CheckBox
-            android:id="@+id/check_todo"
+            android:id="@+id/todoCheck"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
@@ -36,12 +36,11 @@
             android:button="@null"
             android:checked="@{item.check}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_category" />
+            app:layout_constraintTop_toBottomOf="@id/categoryTextView" />
 
         <TextView
-            android:id="@+id/tv_todo"
+            android:id="@+id/todoTextView"
             android:layout_width="0dp"
-            todoCheck="@={item.check}"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -50,19 +49,19 @@
             android:text="@{item.todo}"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/check_todo"
-            app:layout_constraintEnd_toStartOf="@id/tv_startDay"
-            app:layout_constraintStart_toEndOf="@id/check_todo"
-            app:layout_constraintTop_toTopOf="@id/check_todo"
+            app:layout_constraintBottom_toBottomOf="@id/todoCheck"
+            app:layout_constraintEnd_toStartOf="@id/startDayTextView"
+            app:layout_constraintStart_toEndOf="@id/todoCheck"
+            app:layout_constraintTop_toTopOf="@id/todoCheck"
             tools:text="06/29~06/30 Todo" />
 
         <TextView
-            android:id="@+id/tv_endDay"
+            android:id="@+id/endDayTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             dateString="@{item.end_day}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/check_todo"
+            app:layout_constraintTop_toTopOf="@id/todoCheck"
             tools:text="06-29" />
 
         <TextView
@@ -71,26 +70,26 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:text="~"
-            app:layout_constraintBottom_toBottomOf="@id/tv_startDay"
-            app:layout_constraintEnd_toStartOf="@id/tv_endDay"
-            app:layout_constraintTop_toTopOf="@id/tv_startDay" />
+            app:layout_constraintBottom_toBottomOf="@id/startDayTextView"
+            app:layout_constraintEnd_toStartOf="@id/endDayTextView"
+            app:layout_constraintTop_toTopOf="@id/startDayTextView" />
 
         <TextView
-            android:id="@+id/tv_startDay"
+            android:id="@+id/startDayTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             dateString="@{item.start_day}"
             app:layout_constraintEnd_toStartOf="@id/tv_dash"
-            app:layout_constraintTop_toTopOf="@id/check_todo"
+            app:layout_constraintTop_toTopOf="@id/todoCheck"
             tools:text="06-28" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/tv_todo"
+            app:layout_constraintStart_toStartOf="@id/todoTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_todo"
+            app:layout_constraintTop_toBottomOf="@id/todoTextView"
             android:text="@{item.description}"
             android:layout_marginTop="4dp"
             tools:text="Todo의 설명란입니다." />
