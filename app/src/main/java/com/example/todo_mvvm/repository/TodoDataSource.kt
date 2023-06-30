@@ -6,4 +6,5 @@ interface TodoDataSource {
 
     suspend fun getAllTodo(): List<TodoModel>
     suspend fun addTodo(todo: TodoModel)
+    suspend fun updateCheck(todoModel: TodoModel)
 }

@@ -11,4 +11,8 @@ class TodoDataSourceImpl(private val dao: TodoDao): TodoDataSource {
     override suspend fun addTodo(todo: TodoModel) {
         dao.addTodo(todo)
     }
+
+    override suspend fun updateCheck(todoModel: TodoModel) {
+        dao.updateCheck(todoModel)
+    }
 }

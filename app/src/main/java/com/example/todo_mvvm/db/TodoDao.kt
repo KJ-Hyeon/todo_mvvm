@@ -1,9 +1,6 @@
 package com.example.todo_mvvm.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface TodoDao {
@@ -12,4 +9,7 @@ interface TodoDao {
     suspend fun getAllTodo(): List<TodoModel>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addTodo(todo: TodoModel)
+
+    @Update
+    suspend fun updateCheck(todoModel: TodoModel)
 }

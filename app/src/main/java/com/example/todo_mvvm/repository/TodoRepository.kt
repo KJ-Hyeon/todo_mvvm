@@ -12,4 +12,8 @@ class TodoRepository(private val todoDataSourceImpl: TodoDataSourceImpl) {
         todoDataSourceImpl.addTodo(todo)
     }
 
+    suspend fun updateCheck(todoModel: TodoModel) {
+        todoDataSourceImpl.updateCheck(todoModel)
+    }
+
 }
