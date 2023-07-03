@@ -51,7 +51,11 @@ class HomeFragment: Fragment() {
 
         todoAdapter.setOnItemClickListener(object : TodoListAdapter.OnItemClickListener {
             override fun checkboxClick(v: View, todoModel: TodoModel) {
-                todoViewModel.todoCheckUpdate(todoModel)
+                // todoCheck를 Update하기 전에 alertdialog 띄우기태
+                 
+                val moveCompleteDialog = MoveCompleteDialog(requireContext())
+                moveCompleteDialog.showDlg(todoModel)
+//                s
             }
         })
     }
