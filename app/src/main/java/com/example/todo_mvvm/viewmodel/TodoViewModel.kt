@@ -1,5 +1,4 @@
 package com.example.todo_mvvm.viewmodel
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,7 +20,7 @@ class TodoViewModel(private val todoRepository: TodoRepository): ViewModel() {
     private var _addErrorTodoEvent = MutableLiveData<Event<Boolean>>()
     var addErrorTodoEvent: LiveData<Event<Boolean>> = _addErrorTodoEvent
 
-    var checkState = MutableLiveData<Boolean>()
+    var checkState = MutableLiveData<TodoModel>()
 
     init {
         viewModelScope.launch {
@@ -47,6 +46,7 @@ class TodoViewModel(private val todoRepository: TodoRepository): ViewModel() {
     fun todoCheckUpdate(todoModel: TodoModel) {
         viewModelScope.launch {
             todoRepository.updateCheck(todoModel)
+            checkState.postValue(todoModel)
         }
     }
 

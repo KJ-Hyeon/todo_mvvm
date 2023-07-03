@@ -1,6 +1,5 @@
 package com.example.todo_mvvm.ui.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,6 @@ class TodoListAdapter: ListAdapter<TodoModel, TodoListAdapter.TodoViewHolder>(di
     interface OnItemClickListener {
         fun checkboxClick(v: View, todoModel: TodoModel)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_todo, parent, false)
         return TodoViewHolder(binding)
@@ -34,10 +32,17 @@ class TodoListAdapter: ListAdapter<TodoModel, TodoListAdapter.TodoViewHolder>(di
         this.listener = listener
     }
 
+    fun strikeThrough(todoModel: TodoModel) {
+        val position = currentList.indexOf(todoModel)
+        notifyItemChanged(position)
+//        submitList(currentList)
+    }
+
     inner class TodoViewHolder(private val binding: ItemTodoBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: TodoModel) {
             binding.item = item
+
             binding.todoCheck.setOnClickListener {
                 val check = binding.todoCheck.isChecked
                 item.check = check
